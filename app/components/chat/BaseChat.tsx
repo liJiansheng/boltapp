@@ -9,7 +9,7 @@ import { Menu } from '~/components/sidebar/Menu.client';
 import { IconButton } from '~/components/ui/IconButton';
 import { Workbench } from '~/components/workbench/Workbench.client';
 import { classNames } from '~/utils/classNames';
-import { MODEL_LIST, PROVIDER_LIST, initializeModelList } from '~/utils/constants';
+import { MODEL_LIST, initializeModelList } from '~/utils/constants';
 import { Messages } from './Messages.client';
 import { SendButton } from './SendButton.client';
 import { APIKeyManager } from './APIKeyManager';
@@ -343,31 +343,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                   <rect className={classNames(styles.PromptEffectLine)} pathLength="100" strokeLinecap="round"></rect>
                   <rect className={classNames(styles.PromptShine)} x="48" y="24" width="70" height="1"></rect>
                 </svg>
-                <div>
-                  <div className={isModelSettingsCollapsed ? 'hidden' : ''}>
-                    <ModelSelector
-                      key={provider?.name + ':' + modelList.length}
-                      model={model}
-                      setModel={setModel}
-                      modelList={modelList}
-                      provider={provider}
-                      setProvider={setProvider}
-                      providerList={providerList || PROVIDER_LIST}
-                      apiKeys={apiKeys}
-                    />
-                    {(providerList || []).length > 0 && provider && (
-                      <APIKeyManager
-                        provider={provider}
-                        apiKey={apiKeys[provider.name] || ''}
-                        setApiKey={(key) => {
-                          const newApiKeys = { ...apiKeys, [provider.name]: key };
-                          setApiKeys(newApiKeys);
-                          Cookies.set('apiKeys', JSON.stringify(newApiKeys));
-                        }}
-                      />
-                    )}
-                  </div>
-                </div>
+
                 <FilePreview
                   files={uploadedFiles}
                   imageDataList={imageDataList}

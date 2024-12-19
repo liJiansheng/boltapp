@@ -6,7 +6,11 @@ import { optimizeCssModules } from 'vite-plugin-optimize-css-modules';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig((config) => {
+  
   return {
+    server: {
+      host: true  // This enables the server to accept connections from any IP
+    },
     build: {
       target: 'esnext',
     },
